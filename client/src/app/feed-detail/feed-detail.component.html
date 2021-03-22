@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">Feed detail</h2>
+      <div class="row" *ngIf="feedData">
+        <div class="col-md-12 img-sec">
+          <img src="{{feedData.data.image}}" class="img">
+        </div>
+        <div class="col-md-12">
+          <div>
+            <Span class="text-section">
+              <b>Text:</b>
+              <small>{{feedData.data.text}}</small>
+            </Span>
+            <span class="time-section">
+              <b>Time:</b>
+              <small>{{feedData.data.createdAt | date:'medium'}}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="modify-sec col-md-12">
+          <div class="col-md-4 icon-place ">
+            <a class="">
+              <i class="fa fa-arrow-circle-left" aria-hidden="true" (click)="navigateBack()"></i>
+            </a>
+          </div>
+          <div class="col-md-4 icon-place ">
+            <a class="" data-toggle="modal" data-target="#feedFormModal" (click)="editFeed()">
+              <i class="fa fa-pencil text-success" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="col-md-4 icon-place">
+            <a>
+              <i class="fa fa-trash text-danger" aria-hidden="true" (click)="deleteFeed();"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="feedFormModal" tabindex="-1" role="dialog" aria-labelledby="feedFormModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Feed Update Form</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="feed-main">
+          <div class="feed-form">
+            <div class="feed-inr">
+              <ul class="p-0">
+                <li class="form-group">
+                  <label>Text <span class="text-danger">*</span></label>
+                  <br />
+                  <textarea class="form-control" [(ngModel)]="textData">
+                  </textarea>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer text-center">
+          <input type="button" value="Update" class="btn btn-Success text-center"
+            data-dismiss="modal" (click)="updateFeed()">
+      </div>
+    </div>
+  </div>
+</div>
+

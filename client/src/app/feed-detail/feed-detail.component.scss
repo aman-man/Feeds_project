@@ -1,0 +1,24 @@
+.img{
+  width:100%;
+  min-height: 500px;
+}
+
+.time-section {
+  background-color: chartreuse;
+  float: right;
+}
+
+.text-section {
+  background-color: chartreuse;
+}
+
+.modify-sec {
+  // float: right
+  display: inline-flex;
+  text-align: center;
+}
+
+.icon-place {
+  padding: 10px;
+  font-size: 25px;
+}

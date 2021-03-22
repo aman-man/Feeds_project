@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">Feeds</h2>
+      <div class="row">
+        <div class="col-md-10" style="border: 1px solid; border-radius: 12px;">
+          <div *ngIf="allFeeds" class="row">
+            <div class="col-md-12 feed-section">
+              <div class="col-md-12 pb-5 text-center" *ngFor="let feed of allFeeds.data">
+                <div class="col-md-12" style="cursor: pointer;" (click)="navigate(feed._id);">
+                  <div class="img-section">
+                    <img src="{{feed.image}}" class="img">
+                  </div>
+                  <div class="text-section d-inline">
+                    <span class="pr-1 float-left">{{feed.text}} </span>
+                    <span class="pl-1 float-right">{{feed.createdAt | date:'medium'}}</span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="nodata" class="text-danger">
+                <h1>No data Found Dont Shy plz create one</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#feedFormModal">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FeedForm Modal -->
+<div class="modal fade" id="feedFormModal" tabindex="-1" role="dialog" aria-labelledby="feedFormModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Feed Form</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="reset();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="feed-main">
+          <div class="feed-form">
+            <form class="feed-inr" [formGroup]="feedForm">
+              <ul class="p-0">
+                <li class="form-group">
+                  <label>Upload Image <span class="text-danger">*</span></label>
+                  <div class="custom-file">
+                    <input id="inputGroupFile01" type="file" class="custom-file-input"
+                      accept=".jpg,.JPEG,.jpeg,.png"
+                      aria-describedby="inputGroupFileAddon01"
+                      (change)="mediaUpload($event)" />
+                    <label class="custom-file-label">Choose file</label>
+                  </div>
+                </li>
+                <li *ngIf="postMedia">
+                  <img src="{{postMedia}}" style="max-width: 90px;">
+                </li>
+                <li class="form-group">
+                  <label>Text <span class="text-danger">*</span></label>
+                  <br />
+                  <textarea class="form-control" formControlName="text">
+                  </textarea>
+                </li>
+              </ul>
+              </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="reset();">Close</button>
+        <div class="text-center">
+          <input type="button" value="Submit" class="btn btn-primary"
+            data-dismiss="modal" (click)="saveFeedDetail()" [disabled]="!feedForm.valid">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
